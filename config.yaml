@@ -1,0 +1,24 @@
+frame_path: ./data/run_86/high
+ff_path: ./data/run_88_ff/high
+
+a: 40
+b: 200
+
+rois:
+    - name: gd
+      xmin: 1083
+      xmax: 1207
+      ymin: 10
+      ymax: 107
+
+    - name: gd_fat
+      xmin: 1083
+      xmax: 1207
+      ymin: 142
+      ymax: 249
+      
+    - name: fat
+      xmin: 1350
+      xmax: 1400
+      ymin: 142
+      ymax: 249
