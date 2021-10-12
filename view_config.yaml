@@ -1,0 +1,32 @@
+frame_path: ../data/run_86/high
+ff_path: ../data/run_88_ff/high
+
+a: 70
+b: 220
+t: 110
+
+p1_min: -1
+p1_max: 1
+
+
+fov:
+      xmin: 1000
+      xmax: 1800
+      ymin: 0
+      ymax: 255
+
+
+rois:
+    - name: roi1
+      xmin: 1083
+      xmax: 1207
+      ymin: 10
+      ymax: 107
+
+    - name: roi2
+      xmin: 1083
+      xmax: 1207
+      ymin: 142
+      ymax: 249
+
+

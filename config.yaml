@@ -1,24 +1,46 @@
-frame_path: ./data/run_86/high
-ff_path: ./data/run_88_ff/high
+frame_path: ../data/run_86/high
+ff_path: ../data/run_88_ff/high
 
 a: 40
 b: 200
 
+reference_roi: fat6
+
+
 rois:
-    - name: gd
+    - name: gd6
       xmin: 1083
       xmax: 1207
       ymin: 10
       ymax: 107
 
-    - name: gd_fat
+    - name: gd_fat6
       xmin: 1083
       xmax: 1207
       ymin: 142
       ymax: 249
       
-    - name: fat
+    - name: fat6
       xmin: 1350
       xmax: 1400
       ymin: 142
       ymax: 249
+      
+    - name: fat7
+      xmin: 1580
+      xmax: 1680
+      ymin: 142
+      ymax: 249
+      
+    - name: la_fat7
+      xmin: 1740
+      xmax: 1780
+      ymin: 142
+      ymax: 249
+      
+    - name: la7
+      xmin: 1740
+      xmax: 1780
+      ymin: 10
+      ymax: 107
+

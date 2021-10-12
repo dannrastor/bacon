@@ -58,6 +58,7 @@ with open('config.yaml') as f:
 
 
 a, b = config['a'], config['b']
+reference_roi = config['reference_roi']
 print('a={} b={}'.format(a, b))
 rois = load_rois()
 frameset, thrs = load_frameset(config['frame_path'])
@@ -66,6 +67,19 @@ ff_set, _ = load_frameset(config['ff_path'])
 
 th_array = np.arange(*thrs)
 t = np.arange(a, b, thrs[2])
+
+
+
+r = select_roi(frameset, rois[reference_roi])
+rff = select_roi(ff_set, rois[reference_roi])
+rd = np.divide(r, rff, out=np.zeros_like(r), where=rff!=0)
+rda = np.average(rd, axis=(1, 2))
+st = rda[get_index(a):get_index(b)]
+sa = rda[get_index(a)]
+sb = rda[get_index(b)]
+
+reference_p = (sa - sb) / (st - sb)
+
 
 
 for roi in rois:
@@ -105,24 +119,25 @@ for roi in rois:
     sb = rda[get_index(b)]
 
     p1 = (sa - sb) / (st - sb)
-    p2 = (sa - sb) - (st - sb)
-
+    
+    if roi == reference_roi:
+        reference_p = p1
 
     plt.figure('Parameters')
 
     plt.subplot(1,2,1)
-    plt.title('P1 = (a - b) - (t - b)')
+    plt.title('P1 = (a - b) / (t - b)')
     plt.xlabel('t')
     plt.ylabel('Value')
     plt.grid()
-    plt.plot(t, p1, label=roi)
+    plt.plot(t[:-10], p1[:-10], label=roi)
     plt.legend()
     
     plt.subplot(1,2,2)
-    plt.title('P2 = (a - b) / (t - b)')
+    plt.title('Difference with reference ROI ({})'.format(reference_roi))
     plt.xlabel('t')
     plt.ylabel('Value')
-    plt.plot(t, p2, label=roi)
+    plt.plot(t[:-10], p1[:-10] - reference_p[:-10], label=roi)
     plt.grid()
     plt.legend()
 
@@ -130,5 +145,9 @@ plt.show()
 
 
 
+
+plt.grid()
+plt.legend()
+plt.show()
  
 
