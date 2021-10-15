@@ -68,7 +68,7 @@ for roi in rois:
     x1, x2, y1, y2 = rois[roi]
     xx1, xx2, yy1, yy2 = fov
 
-    r = distr[x1-xx1:x2-xx1, y1-yy1:y2-yy1]
+    r = distr[y1-yy1:y2-yy1, x1-xx1:x2-xx1]
     print(roi)
     r_sz = r.size
     r_uf = np.count_nonzero(r < p1_min)
