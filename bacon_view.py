@@ -34,7 +34,7 @@ def load_rois():
 def select_roi(frameset, coords):
     x1, x2, y1, y2 = coords
     return frameset[y1:y2, x1:x2]
-    
+
 
 with open('view_config.yaml') as f:
     config = yaml.safe_load(f)
@@ -74,21 +74,21 @@ for roi in rois:
     r_uf = np.count_nonzero(r < p1_min)
     r_of = np.count_nonzero(r > p1_max)
     r_r = r_sz - r_uf - r_of
-    
+
     print(r.size, ' pixels total')
     print(r_uf, ' pixels with p1 below ', p1_min)
     print(r_r, ' pixels within given range')
     print(r_of, ' pixels with p1 above ', p1_max)
     print()
-    
 
 
-distr[distr < p1_min] = p1_min
-distr[distr > p1_max] = p1_min
-#distr[distr != 0] = 1
+
+distr[distr < p1_min] = 0
+distr[distr > p1_max] = 0
+distr[distr != 0] = 1
 
 plt.figure('distr')
-plt.imshow(distr, origin='lower', cmap='hot')
+plt.imshow(distr, origin='lower', cmap='gray')
 
 name = 'Distribution (a = {}, b = {}, t = {}, {} < p1 < {})'.format(a, b, t, p1_min, p1_max)
 plt.title(name)
@@ -96,9 +96,3 @@ plt.colorbar()
 
 
 plt.show()
-
-
-
- 
-
- 
